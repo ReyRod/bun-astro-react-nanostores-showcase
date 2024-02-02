@@ -1,0 +1,62 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ContentList from "@components/ContentList";
+import Paginator from "@components/Paginator";
+import type { SeriesResponse } from "@typ/index";
+
+const { url } = Astro.request;
+const page = new URL(url).searchParams.get("page") || 1;
+
+const seriesResponse: SeriesResponse = await fetch(
+  `${import.meta.env.TMDB_API_URL}/tv/popular?page=${page}`,
+  {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${import.meta.env.TMDB_API_KEY}`,
+    },
+  }
+).then((res) => res.json());
+---
+
+<Layout title="What To Watch || Popular Movies">
+  <main>
+    <h1>Popular <span class="text-gradient">Movies</span></h1>
+    <ContentList content={seriesResponse.results} type="series" client:idle />
+    <Paginator
+      prevUrl={seriesResponse.page > 1
+        ? `/movies?page=${seriesResponse.page - 1}`
+        : undefined}
+      currentPage={seriesResponse.page}
+      nextUrl={seriesResponse.page < seriesResponse.total_pages
+        ? `/movies?page=${seriesResponse.page + 1}`
+        : undefined}
+    />
+  </main>
+</Layout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 1rem;
+    max-width: 80%;
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+</style>
+@components/ContentList
