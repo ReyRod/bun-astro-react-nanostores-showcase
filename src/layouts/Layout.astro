@@ -25,11 +25,11 @@ const { title } = Astro.props;
   <body>
     <header>
       <nav>
-        <WatchlistFlyoutToggle client:visible />
+        <WatchlistFlyoutToggle client:idle />
       </nav>
     </header>
     <slot />
-    <WatchlistFlyout client:visible />
+    <WatchlistFlyout client:idle />
     <style is:global>
       :root {
         --accent: 136, 58, 234;
