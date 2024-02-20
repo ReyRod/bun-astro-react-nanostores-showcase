@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useStore } from "@nanostores/react";
-import { isWishlistOpen, wishlistItems } from "@stores/wishlist";
+import { isWatchlistOpen, watchlistItems } from "@stores/watchlist";
 
-export default function WishlistFlyoutToggle() {
-  const isOpen = useStore(isWishlistOpen);
-  const items = useStore(wishlistItems);
+export default function WatchlistFlyoutToggle() {
+  const isOpen = useStore(isWatchlistOpen);
+  const items = useStore(watchlistItems);
 
   const [itemsNumber, setItemsNumber] = useState<number | null>(null);
 
@@ -16,7 +16,7 @@ export default function WishlistFlyoutToggle() {
 
   return (
     <button
-      onClick={() => isWishlistOpen.set(!isOpen)}
+      onClick={() => isWatchlistOpen.set(!isOpen)}
       style={{
         position: "absolute",
         top: "10px",
@@ -43,7 +43,7 @@ export default function WishlistFlyoutToggle() {
       }}
     >
       {!isOpen
-        ? `Wishlist ${itemsNumber !== 0 ? `(${itemsNumber})` : ""}`
+        ? `Watchlist ${itemsNumber !== 0 ? `(${itemsNumber})` : ""}`
         : "X"}
     </button>
   );

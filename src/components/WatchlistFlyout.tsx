@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
 import { useStore } from "@nanostores/react";
 import {
-  wishlistItems,
-  isWishlistOpen,
-  removeWishlistItem,
-} from "@stores/wishlist";
-import type { WishlistItem } from "@typ/index";
+  watchlistItems,
+  isWatchlistOpen,
+  removeWatchlistItem,
+} from "@stores/watchlist";
+import type { WatchlistItem } from "@typ/index";
 
-export default function WishlistFlyout() {
-  const isOpen = useStore(isWishlistOpen);
-  const items = useStore(wishlistItems);
+export default function WatchlistFlyout() {
+  const isOpen = useStore(isWatchlistOpen);
+  const items = useStore(watchlistItems);
 
-  const [listItems, setListItems] = useState<Record<string, WishlistItem>>({});
+  const [listItems, setListItems] = useState<Record<string, WatchlistItem>>({});
   useEffect(() => {
     setListItems(items);
   }, [items]);
 
-  const removeItem = (content: WishlistItem, type: "movie" | "series") => {
-    removeWishlistItem({
+  const removeItem = (content: WatchlistItem, type: "movie" | "series") => {
+    removeWatchlistItem({
       id: content.id.toString(),
       type,
     });
@@ -106,7 +106,7 @@ export default function WishlistFlyout() {
           ))}
         </ul>
       ) : (
-        <p>Your Wishlist is empty!</p>
+        <p>Your Watchlist is empty!</p>
       )}
     </aside>
   );

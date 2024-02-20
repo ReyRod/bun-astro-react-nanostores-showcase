@@ -1,11 +1,11 @@
 import { atom } from "nanostores";
 import { persistentMap } from "@nanostores/persistent";
-import type { WishlistItem } from "@typ/index";
+import type { WatchlistItem } from "@typ/index";
 
-export const isWishlistOpen = atom(false);
+export const isWatchlistOpen = atom(false);
 
-export const wishlistItems = persistentMap<Record<string, WishlistItem>>(
-  "wishlistItems",
+export const watchlistItems = persistentMap<Record<string, WatchlistItem>>(
+  "watchlistItems",
   {},
   {
     encode(value) {
@@ -21,7 +21,7 @@ export const wishlistItems = persistentMap<Record<string, WishlistItem>>(
   }
 );
 
-export function addWishlistItem({
+export function addWatchlistItem({
   id,
   title,
   poster_path,
@@ -32,22 +32,22 @@ export function addWishlistItem({
   poster_path: string;
   type: "movie" | "series";
 }) {
-  const existingEntry = wishlistItems.get()[`${id}-${type}`];
+  const existingEntry = watchlistItems.get()[`${id}-${type}`];
   if (!existingEntry) {
-    wishlistItems.setKey(`${id}-${type}`, { id, title, poster_path, type });
+    watchlistItems.setKey(`${id}-${type}`, { id, title, poster_path, type });
   }
 }
 
-export function removeWishlistItem({
+export function removeWatchlistItem({
   id,
   type,
 }: {
   id: string;
   type: "movie" | "series";
 }) {
-  const existingEntry = wishlistItems.get()[`${id}-${type}`];
+  const existingEntry = watchlistItems.get()[`${id}-${type}`];
   if (existingEntry) {
     // @ts-ignore
-    wishlistItems.setKey(`${id}-${type}`, undefined);
+    watchlistItems.setKey(`${id}-${type}`, undefined);
   }
 }

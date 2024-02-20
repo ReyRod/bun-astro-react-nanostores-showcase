@@ -1,6 +1,6 @@
 ---
-import WishlistFlyoutToggle from "@components/WishlistFlyoutToggle";
-import WishlistFlyout from "@components/WishlistFlyout";
+import WatchlistFlyoutToggle from "@components/WatchlistFlyoutToggle";
+import WatchlistFlyout from "@components/WatchlistFlyout";
 
 interface Props {
   title: string;
@@ -22,11 +22,11 @@ const { title } = Astro.props;
   <body>
     <header>
       <nav>
-        <WishlistFlyoutToggle client:idle />
+        <WatchlistFlyoutToggle client:idle />
       </nav>
     </header>
     <slot />
-    <WishlistFlyout client:idle />
+    <WatchlistFlyout client:idle />
     <style is:global>
       :root {
         --accent: 136, 58, 234;

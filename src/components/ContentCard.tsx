@@ -1,4 +1,4 @@
-import WishlistButton from "@components/WishlistButton";
+import WatchlistButton from "@components/WatchlistButton";
 import type { Movie, Series } from "@typ/index";
 
 type AnchorLinkProps = {
@@ -54,7 +54,7 @@ export default function ContentCard({
         />
       )}
 
-      <WishlistButton content={content} type={type} />
+      <WatchlistButton content={content} type={type} />
 
       {showLink ? (
         <AnchorLink href={path}>

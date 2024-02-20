@@ -3,28 +3,28 @@ import { useStore } from "@nanostores/react";
 import type { Movie, Series } from "@typ/index";
 
 import {
-  wishlistItems,
-  addWishlistItem,
-  removeWishlistItem,
-} from "@stores/wishlist";
+  watchlistItems,
+  addWatchlistItem,
+  removeWatchlistItem,
+} from "@stores/watchlist";
 
-export default function WishlistButton({
+export default function WatchlistButton({
   content,
   type,
 }: {
   content: Movie | Series;
   type: "movie" | "series";
 }) {
-  const items = useStore(wishlistItems);
+  const items = useStore(watchlistItems);
 
-  const [isWishlisted, setIsWishlisted] = useState<boolean | null>(null);
+  const [isWatchlisted, setIsWatchlisted] = useState<boolean | null>(null);
 
   useEffect(() => {
-    setIsWishlisted(!!items[`${content.id.toString()}-${type}`]);
+    setIsWatchlisted(!!items[`${content.id.toString()}-${type}`]);
   }, [items]);
 
   const addItem = (content: Movie | Series, type: "movie" | "series") => {
-    addWishlistItem({
+    addWatchlistItem({
       id: content.id.toString(),
       title:
         type === "movie" ? (content as Movie).title : (content as Series).name,
@@ -34,13 +34,13 @@ export default function WishlistButton({
   };
 
   const removeItem = (content: Movie | Series, type: "movie" | "series") => {
-    removeWishlistItem({
+    removeWatchlistItem({
       id: content.id.toString(),
       type,
     });
   };
 
-  if (isWishlisted === null) return null;
+  if (isWatchlisted === null) return null;
 
   return (
     <button
@@ -62,12 +62,12 @@ export default function WishlistButton({
         zIndex: 5,
       }}
       onClick={
-        isWishlisted
+        isWatchlisted
           ? () => removeItem(content, type)
           : () => addItem(content, type)
       }
     >
-      {isWishlisted ? (
+      {isWatchlisted ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

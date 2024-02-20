@@ -37,7 +37,7 @@ export type SeriesResponse = Pagination & {
   results: Series[];
 };
 
-export type WishlistItem = {
+export type WatchlistItem = {
   id: string;
   title: string;
   poster_path: string;
