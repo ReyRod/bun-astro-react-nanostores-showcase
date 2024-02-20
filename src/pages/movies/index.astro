@@ -22,7 +22,7 @@ const moviesResponse: MoviesResponse = await fetch(
 <Layout title="What To Watch || Popular Movies">
   <main>
     <h1>Popular <span class="text-gradient">Movies</span></h1>
-    <ContentList content={moviesResponse.results} type="movie" client:idle />
+    <ContentList content={moviesResponse.results} type="movie" client:visible />
     <Paginator
       prevUrl={moviesResponse.page > 1
         ? `/movies?page=${moviesResponse.page - 1}`
