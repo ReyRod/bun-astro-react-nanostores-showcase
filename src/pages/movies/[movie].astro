@@ -2,7 +2,7 @@
 import Layout from "@layouts/Layout.astro";
 import type { Movie } from "@typ/index";
 import ContentCard from "@components/ContentCard";
-import MovieDetails from "@components/MovieDetails";
+import ContentDetails from "@components/ContentDetails";
 
 export const prerender = false;
 
@@ -28,7 +28,7 @@ const movieDetails: Movie = await fetch(
         <ContentCard content={movieDetails} type="movie" client:idle />
       </div>
       <div>
-        <MovieDetails movie={movieDetails} />
+        <ContentDetails content={movieDetails} />
       </div>
     </section>
   </main>
